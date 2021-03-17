@@ -32,6 +32,7 @@ const styles = {
         alignItems: 'center',
         border: '1px solid #000',
         
+        
     },
     img: {
         width: '4rem',

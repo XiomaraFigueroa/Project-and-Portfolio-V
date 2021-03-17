@@ -69,7 +69,7 @@ class GlobalMap extends Component{
         <Header title={this.state.title}/>
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
         <div className='mainSection' style={styles.mainSection} >
-          <section className='countrySection' >
+          <section style={styles.section} className='countrySection' >
             <h2 style={styles.h2} >Cases by Country</h2>
             
             <div style={styles.list} className='list' >
@@ -120,8 +120,7 @@ const styles ={
     width: '28rem',
     height:'60rem',
     overflow: 'scroll',
-    border: '2px solid #212121'
-   
+  
   },
   h1: {
     textAlign: 'center',
@@ -133,6 +132,8 @@ const styles ={
     color: '#fff',
     textAlign: 'center',
   },
-  
+  section: {
+    border: '2px solid #212121'
+  }
   
 }
