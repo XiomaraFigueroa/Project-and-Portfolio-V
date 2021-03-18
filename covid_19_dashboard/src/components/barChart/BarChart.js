@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import * as d3 from "d3";
-
+import Card from '../card/InfoCard'
 
 
 
@@ -13,12 +13,11 @@ class BarChart extends Component {
     drawChart() {
       const data = this.props.data;
 
-      const svg = d3.select(".mainSection")
+      const svg = d3.select(".chartSection")
         .append("svg")
         .attr("width", this.props.width)
         .attr("height", this.props.height)
-        .style("margin-left", 100)
-        .style("margin-top", 70)
+        .style("margin-bottom", 90)
         .style("background-color", "#212121");
         
                     
@@ -47,11 +46,26 @@ class BarChart extends Component {
           
     render(){
       return (
-      <div id={"#" + this.props.id}></div>
+      <div style={styles.div} id={this.props.id}> 
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+      </div>
+      
       )
     }
   }
       
   export default BarChart;
 
- 
+ const styles ={
+   div: {
+     position: 'relative',
+     display: 'flex',
+     flexWrap: 'wrap',
+     justifyContent: 'space-evenly'
+   }
+ }

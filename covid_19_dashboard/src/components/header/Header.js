@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import logo from '../../logo/covid19_Logo.png';
 import {FaChevronCircleDown} from 'react-icons/fa'
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
+import { Link } from 'react-router-dom';
 
 const Header = props => {
     
@@ -11,16 +11,20 @@ const Header = props => {
             <div style={styles.div} >
                 <img src={logo} alt='Covid-19 Logo' style={styles.logo} />
                 <h1 style={styles.title} >COVID-19 Dashboard</h1>
-                <div>
+                
 
-                    <DropdownButton id="dropdown-basic-button" title={props.title}>
-                    <Dropdown.Item href="#/action-1">US Map</Dropdown.Item>
-                    </DropdownButton>
-                   
+        
+                <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic" style={styles.toggle} >
+                    {props.title} <FaChevronCircleDown style={styles.icon} />
+                </Dropdown.Toggle>
 
-
-
-                </div>
+                <Dropdown.Menu style={styles.menu} > 
+                    <Dropdown.Item as={Link} to={props.to} style={styles.item}>{props.option} </Dropdown.Item> 
+                    
+                </Dropdown.Menu>
+                </Dropdown>
+    
                 
             </div>
         </header>
@@ -41,11 +45,35 @@ const styles ={
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        margin: '0 2rem 0 2rem'
+        margin: '0 2rem 0 2rem',
+       
     },
     title: {
         color: '#fff'
     },
+    toggle: {
+        width: '9rem',
+        backgroundColor: '#212121',
+        height: '3.5rem',
+        fontSize: '1.25rem',
+        color: '#fea82f',
+        border: 'none',
+        verticalAlign: 'align-middle'
+       
+    },
+    menu:{
+        backgroundColor: '#212121',
+        width: '9rem',
+        height: '3.5rem',
+    },
+    item: {
+       textDecoration: 'none',
+       color: '#fea82f',
+       fontSize: '1.25rem',
+       verticalAlign: 'middle'
+    },
+    icon: {
+        color: '#535353'
+    },
     
-
 }

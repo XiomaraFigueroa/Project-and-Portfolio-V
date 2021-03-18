@@ -13,6 +13,8 @@ class Routes extends Component{
                     <Route exact path='/' component={GlobalMap} />
                     <Route exact path='/GlobalMap' component={GlobalMap} />
                     <Route exact path='/USMap' component={USMap} />
+
+                    
                 </Switch>
             </section>
         );
