@@ -19,7 +19,7 @@ const styles ={
         height: '7rem',
         textAlign: 'center',
         borderRadius: '10px',
-        backgroundColor: '#212121', // this is just a test
+        backgroundColor: '#212121', 
         color: '#fff',
         
     },
