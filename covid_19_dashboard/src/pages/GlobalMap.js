@@ -16,7 +16,7 @@ class GlobalMap extends Component{
     to: '/USMap',
     option: 'US Map',
     cardTitle: 'this is a test',
-    cardInfo: 'this is another test'
+    
   }
   // Loads the page.
   componentDidMount(){
@@ -43,19 +43,18 @@ class GlobalMap extends Component{
     .then(parsedJSON => parsedJSON.map(countries =>({
         deaths: `${countries.deaths}`,
         country: `${countries.country}`,
-        countryInfo: `${countries.countryInfo.flag}`,
-
-      }
-    )))
+        countryInfo: `${countries.countryInfo.flag}`
+    })))
     .then(countries => this.setState({
       countries, 
       isLoaded:false
     }))
+      
     .catch(error => console.log('parsing failed', error))
 
- 
   }
-    
+
+ 
   render(){
     const {countries, isLoaded} = this.state;
 
@@ -76,20 +75,20 @@ class GlobalMap extends Component{
                 
                 {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
-                    const {country, countryInfo,  deaths, } = countries;
-                    return <CountryNav style={styles.list} key={i} deaths={deaths} country={country.toUpperCase()} countryInfo={countryInfo}  /> 
+                    const {country, countryInfo,  deaths} = countries;
+                    return <CountryNav style={styles.list} key={i} deaths={deaths} country={country.toUpperCase()} countryInfo={countryInfo}  />
                     }) : null
                 } 
                 </div>
             </section>
             <div className='chartSection' style={styles.chartSection} >
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} id={this.state.id} cardTitle={this.state.cardTitle} cardInfo={this.state.cardInfo} />
+
+              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} />
+
             </div>
         </div>
         
-        
-        
-        
+    
        <Footer />
       </div>
 

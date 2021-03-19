@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 const InfoCard = props => {
     return(
         <Card style={styles.card}  >
-            <Card.Body>
+            <Card.Body key={props.id} >
                 <Card.Title style={styles.cardTitle} >{props.cardTitle}</Card.Title>
                 <Card.Text>{props.cardInfo}</Card.Text> 
             </Card.Body>

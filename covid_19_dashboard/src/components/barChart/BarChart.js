@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import * as d3 from "d3";
-import Card from '../card/InfoCard'
+import InfoCard from '../card/InfoCard'
 
 
 
 class BarChart extends Component {
+  
     componentDidMount() {
       this.drawChart();
     }
@@ -47,12 +48,12 @@ class BarChart extends Component {
     render(){
       return (
       <div style={styles.div} id={this.props.id}> 
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
-        <Card cardTitle={this.props.cardTitle} cardInfo={this.props.cardInfo} />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Cases' />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Deaths' />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Recovered' />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Affected Countries' />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Active' />
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Critical' />
       </div>
       
       )

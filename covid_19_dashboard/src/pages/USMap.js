@@ -16,9 +16,7 @@ class USMap extends Component{
     to: '/GlobalMap',
     option: 'Global Map',
     cardTitle: 'this is a test',
-    cardInfo: 'this is another test'
-    
-      
+ 
   }
   // Loads the page.
   componentDidMount(){
@@ -80,7 +78,7 @@ class USMap extends Component{
                 </div>
           </section>
           <div className='chartSection' style={styles.chartSection} >
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} id={this.state.id} cardTitle={this.state.cardTitle} cardInfo={this.state.cardInfo} />
+            <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> 
             </div>
         </div>
 

@@ -12,11 +12,12 @@ const Header = props => {
                 <img src={logo} alt='Covid-19 Logo' style={styles.logo} />
                 <h1 style={styles.title} >COVID-19 Dashboard</h1>
                 
-
-        
                 <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic" style={styles.toggle} >
-                    {props.title} <FaChevronCircleDown style={styles.icon} />
+                    <div style={styles.content} >
+                        {props.title} <FaChevronCircleDown style={styles.icon} />
+                    </div>
+                    
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu style={styles.menu} > 
@@ -58,7 +59,7 @@ const styles ={
         fontSize: '1.25rem',
         color: '#fea82f',
         border: 'none',
-        verticalAlign: 'align-middle'
+        
        
     },
     menu:{
@@ -73,7 +74,12 @@ const styles ={
        verticalAlign: 'middle'
     },
     icon: {
-        color: '#535353'
+        color: '#535353',
+       
     },
-    
+    content: {
+        display: 'flex',
+        alignItems: 'center',
+       justifyContent: 'space-between'
+    }
 }
