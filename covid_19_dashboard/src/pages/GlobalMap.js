@@ -102,14 +102,14 @@ class GlobalMap extends Component{
             </section>
             <div className='chartSection' style={styles.chartSection} >
 
-              {/* {
+              {
                     !isLoaded && data.length > 0 ? data.map((data, i) => {
                     const cases = data;
                     return <BarChart key={i}  data={cases} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> 
                     }) : null
-                } */}
+                }
 
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} />
+              {/* <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> */}
 
             </div>
         </div>
