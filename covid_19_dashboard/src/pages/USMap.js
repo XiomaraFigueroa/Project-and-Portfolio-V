@@ -41,7 +41,7 @@ class USMap extends Component{
     fetch('https://disease.sh/v3/covid-19/states')
     .then(response => response.json())
     .then(parsedJSON => parsedJSON.map(states =>({
-        deaths: `${states.deaths}`,
+        cases: `${states.cases}`,
         state: `${states.state}`,
       }
     )))
@@ -71,8 +71,8 @@ class USMap extends Component{
                 
                 {
                     !isLoaded && states.length > 0 ? states.map((states, i) => {
-                    const {state,  deaths, } = states;
-                    return <StateNav style={styles.list} key={i} deaths={deaths} state={state.toUpperCase()}  />
+                    const {state,  cases, } = states;
+                    return <StateNav style={styles.list} key={i} cases={cases} state={state.toUpperCase()}  />
                     }) : null
                 } 
                 </div>
@@ -85,14 +85,7 @@ class USMap extends Component{
         <Footer />
        
       </div>
-        
-        
-        
-       
-        
-          
-    
-        
+         
     );
   }
 

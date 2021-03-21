@@ -7,7 +7,8 @@ import Footer from '../components/footer/Footer';
 
 class GlobalMap extends Component{
   state = {
-    data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    data: [],
     width: 1050,
     height: 350,
     countries: [],
@@ -15,18 +16,38 @@ class GlobalMap extends Component{
     title: 'Global Map',
     to: '/USMap',
     option: 'US Map',
-    cardTitle: 'this is a test',
+    cardTitle: 'Coming Soon',
     
   }
   // Loads the page.
   componentDidMount(){
     const isLoaded = this.state.isLoaded;
     if(isLoaded){
-        this.fetchData()
+        this.fetchData();
+        this.fetchDataForBar();
     } else {
         console.log(`Error.Try again.`)
     }      
   }
+
+    // Fetches the data.
+    fetchDataForBar(){
+      this.setState({
+        isLoaded: true,
+        data:[]
+      })
+      // Fetches the countries from the Api
+      fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
+      .then(response => response.json())
+      .then(parsedJSON => parsedJSON.map(data =>({
+          cases: `${data.cases}`,
+      })))
+      .then(data => this.setState({
+        data,
+        isLoaded:false
+      }))
+      .catch(error => console.log('parsing failed', error))
+    }
 
   // Fetches the data.
   fetchData(){
@@ -37,11 +58,11 @@ class GlobalMap extends Component{
     })
 
 
-    // Fetches the states from the Api
+    // Fetches the countries from the Api
     fetch('https://disease.sh/v3/covid-19/countries')
     .then(response => response.json())
     .then(parsedJSON => parsedJSON.map(countries =>({
-        deaths: `${countries.deaths}`,
+        cases: `${countries.cases}`,
         country: `${countries.country}`,
         countryInfo: `${countries.countryInfo.flag}`
     })))
@@ -53,17 +74,15 @@ class GlobalMap extends Component{
     .catch(error => console.log('parsing failed', error))
 
   }
-
+  
  
   render(){
-    const {countries, isLoaded} = this.state;
+    const {countries, data, isLoaded} = this.state;
 
     return(
       <div className='main' style={styles.container} >
         <Header title={this.state.title} option={this.state.option} to={this.state.to}  />
 
-        
-        
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
 
         <div className='mainSection' style={styles.mainSection} >
@@ -75,13 +94,20 @@ class GlobalMap extends Component{
                 
                 {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
-                    const {country, countryInfo,  deaths} = countries;
-                    return <CountryNav style={styles.list} key={i} deaths={deaths} country={country.toUpperCase()} countryInfo={countryInfo}  />
+                    const {country, countryInfo,  cases} = countries;
+                    return <CountryNav style={styles.list} key={i} cases={cases} country={country.toUpperCase()} countryInfo={countryInfo}  />
                     }) : null
                 } 
                 </div>
             </section>
             <div className='chartSection' style={styles.chartSection} >
+
+              {/* {
+                    !isLoaded && data.length > 0 ? data.map((data, i) => {
+                    const cases = data;
+                    return <BarChart key={i}  data={cases} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> 
+                    }) : null
+                } */}
 
               <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} />
 

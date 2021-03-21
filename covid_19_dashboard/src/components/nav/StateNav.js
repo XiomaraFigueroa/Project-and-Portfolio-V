@@ -2,13 +2,17 @@ import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const StateNav = props => {
+
+    function alertClicked() {
+        alert('You clicked '+ [props.state]);
+        // add additional info from the api.
+        
+    }
+
     return(
 
-        //============ NEED TO FIGURE OUT HOW TO let the user click one
-
-        
-        <ListGroup.Item key={props.id} style={styles.list}>
-            <div><strong style={styles.strongText}>{props.deaths}</strong> {props.state}</div> 
+        <ListGroup.Item action onClick={alertClicked} key={props.id} style={styles.list}>
+            <div><strong style={styles.strongText}>{props.cases}</strong> {props.state}</div> 
         </ListGroup.Item>
        
      
@@ -30,7 +34,7 @@ const styles = {
         color: '#fff',
         alignItems: 'center',
         border: '1px solid #000',
-        
+        width: '100%'
         
     },
     img: {

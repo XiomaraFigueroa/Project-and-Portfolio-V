@@ -5,6 +5,8 @@ import InfoCard from '../card/InfoCard'
 
 
 class BarChart extends Component {
+
+  
   
     componentDidMount() {
       this.drawChart();
@@ -24,7 +26,7 @@ class BarChart extends Component {
                     
       svg.selectAll("rect")
         .data(data)
-        .enter()
+        .enter(data)
         .append("rect")
         .attr("x", (d, i) => i * 150)
         .attr("y", (d, i) => this.props.height - 10 * d)
@@ -47,8 +49,8 @@ class BarChart extends Component {
           
     render(){
       return (
-      <div style={styles.div} id={this.props.id}> 
-        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Cases' />
+      <div style={styles.div}  > 
+        <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Cases' /> 
         <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Deaths' />
         <InfoCard cardTitle={this.props.cardTitle} cardInfo='Todays Recovered' />
         <InfoCard cardTitle={this.props.cardTitle} cardInfo='Affected Countries' />
