@@ -3,12 +3,12 @@ import BarChart from '../components/barChart/BarChart';
 import Header from '../components/header/Header';
 import CountryNav from '../components/nav/CountryNav'
 import Footer from '../components/footer/Footer';
-
+import InfoCard from '../components/card/InfoCard'
 
 class GlobalMap extends Component{
   state = {
-    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
-    data: [],
+    data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    //data: [],
     width: 1050,
     height: 350,
     countries: [],
@@ -17,6 +17,7 @@ class GlobalMap extends Component{
     to: '/USMap',
     option: 'US Map',
     cardTitle: 'Coming Soon',
+    //cardTitle: []
     
   }
   // Loads the page.
@@ -24,37 +25,19 @@ class GlobalMap extends Component{
     const isLoaded = this.state.isLoaded;
     if(isLoaded){
         this.fetchData();
-        this.fetchDataForBar();
+        
     } else {
         console.log(`Error.Try again.`)
     }      
   }
-
-    // Fetches the data.
-    fetchDataForBar(){
-      this.setState({
-        isLoaded: true,
-        data:[]
-      })
-      // Fetches the countries from the Api
-      fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
-      .then(response => response.json())
-      .then(parsedJSON => parsedJSON.map(data =>({
-          cases: `${data.cases}`,
-      })))
-      .then(data => this.setState({
-        data,
-        isLoaded:false
-      }))
-      .catch(error => console.log('parsing failed', error))
-    }
 
   // Fetches the data.
   fetchData(){
 
     this.setState({
       isLoaded: true,
-      countries:[]
+      countries:[],
+      //cardTitle: []
     })
 
 
@@ -64,7 +47,15 @@ class GlobalMap extends Component{
     .then(parsedJSON => parsedJSON.map(countries =>({
         cases: `${countries.cases}`,
         country: `${countries.country}`,
-        countryInfo: `${countries.countryInfo.flag}`
+        countryInfo: `${countries.countryInfo.flag}`,
+        
+        population: `${countries.population}`,
+        updated: `${countries.updated}`,
+        todayCases: `${countries.todayCases}`,
+        todayDeaths: `${countries.todayDeaths}`,
+        recovered: `${countries.recovered}`,
+        active: `${countries.active}`,
+        
     })))
     .then(countries => this.setState({
       countries, 
@@ -73,11 +64,30 @@ class GlobalMap extends Component{
       
     .catch(error => console.log('parsing failed', error))
 
+    // // Put the new fetch info here.
+    // fetch('https://disease.sh/v3/covid-19/all')
+    // .then(response => response.json())
+    // .then(parsedJSON => parsedJSON.map(cardTitle =>({
+    //     todayCases: `${cardTitle.todayCases}`,
+    //     todayDeaths: `${cardTitle.todayDeaths}`,
+    //     todayRecovered: `${cardTitle.todayRecovered}`,
+    //     test: `${cardTitle.test}`,
+    //     active:  `${cardTitle.active}`,
+    //     critical: `${cardTitle.critical}`
+    //   }
+    // )))
+    // .then(cardTitle => this.setState({
+    //   cardTitle, 
+    //   isLoaded:false
+    // }))
+    // .catch(error => console.log('parsing failed', error))
+
+
   }
   
  
   render(){
-    const {countries, data, isLoaded} = this.state;
+    const {countries,  isLoaded} = this.state;
 
     return(
       <div className='main' style={styles.container} >
@@ -85,7 +95,7 @@ class GlobalMap extends Component{
 
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
 
-        <div className='mainSection' style={styles.mainSection} >
+        <section className='mainSection' style={styles.mainSection} >
             <section style={styles.listSection} className='listSection' >
 
                 <h2 style={styles.h2} >Cases by Country</h2>
@@ -94,28 +104,41 @@ class GlobalMap extends Component{
                 
                 {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
-                    const {country, countryInfo,  cases} = countries;
-                    return <CountryNav style={styles.list} key={i} cases={cases} country={country.toUpperCase()} countryInfo={countryInfo}  />
+                    const {country, countryInfo,  cases, population, updated, todayCases, todayDeaths, recovered, active} = countries;
+                    return <CountryNav style={styles.list} key={i} cases={cases} country={country.toUpperCase()} countryInfo={countryInfo}
+                      population={population} updated={updated} todayCases={todayCases}  todayDeaths={todayDeaths} recovered={recovered}
+                      active={active} />
                     }) : null
                 } 
                 </div>
             </section>
-            <div className='chartSection' style={styles.chartSection} >
-
-              {
-                    !isLoaded && data.length > 0 ? data.map((data, i) => {
-                    const cases = data;
-                    return <BarChart key={i}  data={cases} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> 
+            {/* You should change this to a section tag */}
+           <section className='chartSection' style={styles.chartSection} >
+              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
+          
+              <section style={styles.infoSection}>
+                {/* You will create a loop to loop through the info. Just like the barchart. */}
+                {/* {
+                    !isLoaded && cardTitle.length > 0 ? cardTitle.map((cardTitle, i) => {
+                    const { todayCases} = cardTitle;
+                    return <InfoCard key={i} cardTitle={todayCases} cardInfo='Todays Cases' /> 
+                      
                     }) : null
-                }
-
-              {/* <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> */}
-
-            </div>
-        </div>
+                }  */}
+              
+                
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Cases' /> 
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Deaths' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Recovered' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Tests' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Active' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Critical' />
+              </section>
+          </section>
+        </section>
         
-    
-       <Footer />
+                
+        <Footer />
       </div>
 
         
@@ -144,7 +167,7 @@ const styles ={
     marginLeft: '2rem',
     marginRight: '2rem',
     width: '28rem',
-    height:'43rem',
+    height:'45rem',
     overflow: 'scroll',
   
   },
@@ -152,10 +175,12 @@ const styles ={
     textAlign: 'center',
     color: '#fff',
     marginTop: '2rem',
-    fontSize: '2rem'
+    fontSize: '2rem',
+    fontFamily: 'Roboto, san-serif'
   },
   h2:{
-    color: '#fff'
+    color: '#fff',
+    fontFamily: 'Roboto, san-serif'
   },
   listSection: {
       position: 'relative',
@@ -166,10 +191,20 @@ const styles ={
       border: '2px solid #212121'
   },
   chartSection: {
+    position: 'relative',
     display: 'flex',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
+    maxWidth: '75rem'
+  },
+  infoSection: {
+    position: 'relative',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+   
   }
+  
   
   
 }

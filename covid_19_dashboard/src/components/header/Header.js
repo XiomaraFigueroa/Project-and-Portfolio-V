@@ -50,7 +50,8 @@ const styles ={
        
     },
     title: {
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'Roboto, san-serif'
     },
     toggle: {
         width: '9rem',
@@ -71,7 +72,9 @@ const styles ={
        textDecoration: 'none',
        color: '#fea82f',
        fontSize: '1.25rem',
-       verticalAlign: 'middle'
+       verticalAlign: 'middle',
+       fontFamily: 'Roboto, san-serif',
+     
     },
     icon: {
         color: '#535353',

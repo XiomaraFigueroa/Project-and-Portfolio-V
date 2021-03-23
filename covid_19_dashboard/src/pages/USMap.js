@@ -3,6 +3,7 @@ import BarChart from '../components/barChart/BarChart';
 import Header from '../components/header/Header';
 import StateNav from '../components/nav/StateNav'
 import Footer from '../components/footer/Footer'
+import InfoCard from '../components/card/InfoCard';
 
 
 class USMap extends Component{
@@ -15,7 +16,7 @@ class USMap extends Component{
     title: 'US Map',
     to: '/GlobalMap',
     option: 'Global Map',
-    cardTitle: 'this is a test',
+    cardTitle: 'Coming Soon',
  
   }
   // Loads the page.
@@ -43,6 +44,13 @@ class USMap extends Component{
     .then(parsedJSON => parsedJSON.map(states =>({
         cases: `${states.cases}`,
         state: `${states.state}`,
+
+        population: `${states.population}`,
+        updated: `${states.updated}`,
+        todayCases: `${states.todayCases}`,
+        todayDeaths: `${states.todayDeaths}`,
+        recovered: `${states.recovered}`,
+        active: `${states.active}`,
       }
     )))
     .then(states => this.setState({
@@ -50,6 +58,8 @@ class USMap extends Component{
       isLoaded:false
     }))
     .catch(error => console.log('parsing failed', error))
+    // Put the new fetch info here.
+   
 
  
   }
@@ -62,25 +72,39 @@ class USMap extends Component{
         <Header title={this.state.title} option={this.state.option} to={this.state.to} />
         
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
-
-        <div className='mainSection' style={styles.mainSection} >
+         {/* You should change this to a section tag */}
+        <section className='mainSection' style={styles.mainSection} >
             <section style={styles.listSection} className='listSection' >
                 <h2 style={styles.h2} >Top 50 Confirmed Cases by County</h2>
             
                 <div style={styles.list} className='list' >
                 
-                {
-                    !isLoaded && states.length > 0 ? states.map((states, i) => {
-                    const {state,  cases, } = states;
-                    return <StateNav style={styles.list} key={i} cases={cases} state={state.toUpperCase()}  />
-                    }) : null
-                } 
+                  {
+                      !isLoaded && states.length > 0 ? states.map((states, i) => {
+                      const {state,  cases, population, updated, todayCases, todayDeaths,recovered, active } = states;
+                      return <StateNav style={styles.list} key={i} cases={cases} state={state.toUpperCase()} 
+                      population={population} updated={updated} todayCases={todayCases}  todayDeaths={todayDeaths} recovered={recovered}
+                      active={active} />
+                      }) : null
+                  } 
                 </div>
           </section>
-          <div className='chartSection' style={styles.chartSection} >
-            <BarChart  data={this.state.data} width={this.state.width} height={this.state.height} cardTitle={this.state.cardTitle} /> 
-            </div>
-        </div>
+           {/* You should change this to a section tag */}
+           <section className='chartSection' style={styles.chartSection} >
+              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
+          
+              <section style={styles.infoSection}>
+                {/* You will create a loop to loop through the info. Just like the barchart. */}
+                
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Cases' /> 
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Deaths' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Recovered' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Tests' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Active' />
+                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Critical' />
+              </section>
+          </section>
+        </section>
 
         <Footer />
        
@@ -110,7 +134,7 @@ const styles ={
       marginLeft: '2rem',
       marginRight: '2rem',
       width: '28rem',
-      height:'43rem',
+      height:'45rem',
       overflow: 'scroll',
     
     },
@@ -118,10 +142,12 @@ const styles ={
       textAlign: 'center',
       color: '#fff',
       marginTop: '2rem',
-      fontSize: '2rem'
+      fontSize: '2rem',
+      fontFamily: 'Roboto, san-serif'
     },
     h2:{
-      color: '#fff'
+      color: '#fff', 
+      fontFamily: 'Roboto, san-serif'
     },
     listSection: {
         position: 'relative',
@@ -135,6 +161,13 @@ const styles ={
       display: 'flex',
       flexWrap: 'wrap-reverse',
       justifyContent: 'center',
+      maxWidth: '75rem'
+    },
+    infoSection: {
+      position: 'relative',
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-evenly'
     }
     
     

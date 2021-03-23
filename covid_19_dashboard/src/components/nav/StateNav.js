@@ -4,8 +4,14 @@ import ListGroup from 'react-bootstrap/ListGroup'
 const StateNav = props => {
 
     function alertClicked() {
-        alert('You clicked '+ [props.state]);
-        // add additional info from the api.
+        alert('State: '+ [props.state] + '\n\n' +
+        'Population: ' + [props.population] + '\n' + 
+        'Updated: ' + [props.updated] + '\n' + 
+        'Today Cases: ' + [props.todayCases] + '\n' +
+        'Today Deaths: ' + [props.todayDeaths] + '\n' +
+        'Recovered: ' + [props.recovered] + '\n' +
+        'Active : ' + [props.active] 
+        );
         
     }
 
@@ -34,7 +40,8 @@ const styles = {
         color: '#fff',
         alignItems: 'center',
         border: '1px solid #000',
-        width: '100%'
+        width: '100%',
+        fontFamily: 'Roboto, san-serif'
         
     },
     img: {

@@ -5,7 +5,7 @@ const Footer = props =>{
 
     <footer style={styles.footer} key={props.id}>
         <div style={styles.div} >
-            <p>This is where the updated is suppose to appear.{props.updated}</p>
+            <p>Coming Soon.{props.updated}</p>
         </div>
         
     </footer>
@@ -21,6 +21,7 @@ const styles ={
     div: {
         display: 'flex',
         justifyContent: 'flex-end',
-        color: '#fff'
+        color: '#fff',
+        fontFamily: 'Open Sans, san-serif'
     }
 }

@@ -21,11 +21,12 @@ const styles ={
         borderRadius: '10px',
         backgroundColor: '#212121', 
         color: '#fff',
-        
+        fontFamily: 'Open Sans, san-serif'
     },
     cardTitle:{
         color: '#FEA82F',
-        fontSize: '2.5rem'
+        fontSize: '2.5rem',
+        fontFamily: 'Roboto, san-serif'
     }
     
 }

@@ -7,8 +7,15 @@ import ListGroup from 'react-bootstrap/ListGroup'
 const CountryNav = props => {
 
     function alertClicked() {
-        alert('You clicked '+ [props.country]); 
-        // add additional info from the api.
+        alert('Country: '+ [props.country] + '\n\n' +
+        'Population: ' + [props.population] + '\n' + 
+        'Updated: ' + [props.updated] + '\n' + 
+        'Today Cases: ' + [props.todayCases] + '\n' +
+        'Today Deaths: ' + [props.todayDeaths] + '\n' +
+        'Recovered: ' + [props.recovered] + '\n' +
+        'Active : ' + [props.active] 
+        );
+        
     }
       
     return(
@@ -38,6 +45,7 @@ const styles = {
         alignItems: 'center',
         border: '1px solid #000',
         width: '100%',
+        fontFamily: 'Roboto, san-serif'
         // need to figure out how to add the hover effect 
         
     },
