@@ -38,16 +38,17 @@ class GlobalMap extends Component{
       
     })
      // Fetch 7 day history for all countries
-     fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
-     .then(response => response.json())
-     .then(data => (
-      this.setState(
-          {
-              data : data
-          }
-      )
-  ))
-      .catch(error => console.log('parsing failed', error))
+    fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
+    .then(response => response.json())
+    .then(data => console.log(data.cases)) // this works just have to figure how to output it.
+    // ( 
+    //   this.setState(
+    //       {
+    //           data : data
+    //       }
+    //   )
+    // ))
+    //.catch(error => console.log('parsing failed', error))
   }
 
   // Api for Cards
@@ -125,21 +126,21 @@ class GlobalMap extends Component{
             
                 <div style={styles.list} className='list' >
                 
-                {
+                  {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
                     const {country, countryInfo,  cases, population, updated, todayCases, todayDeaths, todayRecovered, active} = countries;
                     return <CountryNav style={styles.list} key={i} cases={cases} country={country.toUpperCase()} countryInfo={countryInfo}
                     population={population} updated={updated} todayCases={todayCases}  todayDeaths={todayDeaths} todayRecovered={todayRecovered}
                     active={active} />  
                     }) : null
-                } 
+                  } 
                 </div>
             </section>
             <section className='chartSection' style={styles.chartSection} >
-
+            
             
               {/* NEED TO WORK ON THIS PART */}
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  />
+              <BarChart data={this.state.data}  width={this.state.width} height={this.state.height}  />
               
               <section className='infoSection' style={styles.infoSection}> 
 
