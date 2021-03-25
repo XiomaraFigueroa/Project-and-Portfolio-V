@@ -12,7 +12,7 @@ const CountryNav = props => {
         'Updated: ' + [props.updated] + '\n' + 
         'Today Cases: ' + [props.todayCases] + '\n' +
         'Today Deaths: ' + [props.todayDeaths] + '\n' +
-        'Recovered: ' + [props.recovered] + '\n' +
+        'Today Recovered: ' + [props.todayRecovered] + '\n' +
         'Active : ' + [props.active] 
         );
         

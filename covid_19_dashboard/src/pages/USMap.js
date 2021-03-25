@@ -16,17 +16,37 @@ class USMap extends Component{
     title: 'US Map',
     to: '/GlobalMap',
     option: 'Global Map',
-    cardTitle: 'Coming Soon',
- 
+    covid_world: []
   }
   // Loads the page.
   componentDidMount(){
     const isLoaded = this.state.isLoaded;
     if(isLoaded){
-        this.fetchData()
+        this.fetchData();
+        this.fetchAll();
     } else {
         console.log(`Error.Try again.`)
     }      
+  }
+  
+  fetchAll(){
+    this.setState({
+      covid_world:[],
+      
+    })
+     // Put the new fetch info here.
+     fetch('https://disease.sh/v3/covid-19/countries/United%20States?strict=true')
+     .then(response => response.json())
+     .then(data => (
+         this.setState(
+             {
+                 covid_world : data
+             }
+         )
+     ))
+    .catch(error => console.log('parsing failed', error))
+
+    
   }
 
   // Fetches the data.
@@ -72,7 +92,7 @@ class USMap extends Component{
         <Header title={this.state.title} option={this.state.option} to={this.state.to} />
         
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
-         {/* You should change this to a section tag */}
+        
         <section className='mainSection' style={styles.mainSection} >
             <section style={styles.listSection} className='listSection' >
                 <h2 style={styles.h2} >Top 50 Confirmed Cases by County</h2>
@@ -89,19 +109,14 @@ class USMap extends Component{
                   } 
                 </div>
           </section>
-           {/* You should change this to a section tag */}
+           
            <section className='chartSection' style={styles.chartSection} >
               <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
           
-              <section style={styles.infoSection}>
-                {/* You will create a loop to loop through the info. Just like the barchart. */}
-                
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Cases' /> 
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Deaths' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Recovered' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Tests' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Active' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Critical' />
+              <section className='infoSection' style={styles.infoSection}>
+ 
+                <InfoCard world={this.state.covid_world} />
+
               </section>
           </section>
         </section>

@@ -5,7 +5,7 @@ const Footer = props =>{
 
     <footer style={styles.footer} key={props.id}>
         <div style={styles.div} >
-            <p>Coming Soon.{props.updated}</p>
+            <p>Design and Developed by Xiomara Figueroa</p>
         </div>
         
     </footer>

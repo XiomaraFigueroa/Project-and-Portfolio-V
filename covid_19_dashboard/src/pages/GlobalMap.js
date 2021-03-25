@@ -7,8 +7,8 @@ import InfoCard from '../components/card/InfoCard'
 
 class GlobalMap extends Component{
   state = {
-    data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
-    //data: [],
+    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    data: [],
     width: 1050,
     height: 350,
     countries: [],
@@ -16,8 +16,7 @@ class GlobalMap extends Component{
     title: 'Global Map',
     to: '/USMap',
     option: 'US Map',
-    cardTitle: 'Coming Soon',
-    //cardTitle: []
+    covid_world:[],
     
   }
   // Loads the page.
@@ -25,11 +24,53 @@ class GlobalMap extends Component{
     const isLoaded = this.state.isLoaded;
     if(isLoaded){
         this.fetchData();
+        this.fetchAll();
+        this.fetchDataForBar();
         
     } else {
         console.log(`Error.Try again.`)
     }      
   }
+  // Fetches the data.
+  fetchDataForBar(){ //============ NEED TO WORK ON THIS PART ===========//
+    this.setState({
+      data:[],
+      
+    })
+     // Fetch 7 day history for all countries
+     fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
+     .then(response => response.json())
+     .then(data => (
+      this.setState(
+          {
+              data : data
+          }
+      )
+  ))
+      .catch(error => console.log('parsing failed', error))
+  }
+
+  // Api for Cards
+  fetchAll(){
+    this.setState({
+      covid_world:[],
+      
+    })
+     // Fetch world
+     fetch('https://disease.sh/v3/covid-19/all')
+     .then(response => response.json())
+     .then(data => (
+         this.setState(
+             {
+                 covid_world : data
+             }
+         )
+     ))
+    .catch(error => console.log('parsing failed', error))
+
+    
+  }
+
 
   // Fetches the data.
   fetchData(){
@@ -37,65 +78,47 @@ class GlobalMap extends Component{
     this.setState({
       isLoaded: true,
       countries:[],
-      //cardTitle: []
+      
     })
 
-
-    // Fetches the countries from the Api
-    fetch('https://disease.sh/v3/covid-19/countries')
-    .then(response => response.json())
-    .then(parsedJSON => parsedJSON.map(countries =>({
-        cases: `${countries.cases}`,
-        country: `${countries.country}`,
-        countryInfo: `${countries.countryInfo.flag}`,
+      // Fetches the countries from the Api
+      fetch('https://disease.sh/v3/covid-19/countries')
+      .then(response => response.json())
+      .then(parsedJSON => parsedJSON.map(countries =>({
+          cases: `${countries.cases}`,
+          country: `${countries.country}`,
+          countryInfo: `${countries.countryInfo.flag}`,
+          
+          population: `${countries.population}`,
+          updated: `${countries.updated}`,
+          todayCases: `${countries.todayCases}`,
+          todayDeaths: `${countries.todayDeaths}`,
+          todayRecovered: `${countries.todayRecovered}`,
+          active: `${countries.active}`,
+          
+      })))
+      .then(countries => this.setState({
+        countries, 
+        isLoaded:false
+      }))
         
-        population: `${countries.population}`,
-        updated: `${countries.updated}`,
-        todayCases: `${countries.todayCases}`,
-        todayDeaths: `${countries.todayDeaths}`,
-        recovered: `${countries.recovered}`,
-        active: `${countries.active}`,
-        
-    })))
-    .then(countries => this.setState({
-      countries, 
-      isLoaded:false
-    }))
-      
-    .catch(error => console.log('parsing failed', error))
-
-    // // Put the new fetch info here.
-    // fetch('https://disease.sh/v3/covid-19/all')
-    // .then(response => response.json())
-    // .then(parsedJSON => parsedJSON.map(cardTitle =>({
-    //     todayCases: `${cardTitle.todayCases}`,
-    //     todayDeaths: `${cardTitle.todayDeaths}`,
-    //     todayRecovered: `${cardTitle.todayRecovered}`,
-    //     test: `${cardTitle.test}`,
-    //     active:  `${cardTitle.active}`,
-    //     critical: `${cardTitle.critical}`
-    //   }
-    // )))
-    // .then(cardTitle => this.setState({
-    //   cardTitle, 
-    //   isLoaded:false
-    // }))
-    // .catch(error => console.log('parsing failed', error))
-
-
+      .catch(error => console.log('parsing failed', error))
   }
+
+  
   
  
   render(){
-    const {countries,  isLoaded} = this.state;
+    const {countries, isLoaded} = this.state;
 
+    
     return(
       <div className='main' style={styles.container} >
         <Header title={this.state.title} option={this.state.option} to={this.state.to}  />
 
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
 
-        <section className='mainSection' style={styles.mainSection} >
+        <div className='mainSection' style={styles.mainSection} >
             <section style={styles.listSection} className='listSection' >
 
                 <h2 style={styles.h2} >Cases by Country</h2>
@@ -104,41 +127,32 @@ class GlobalMap extends Component{
                 
                 {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
-                    const {country, countryInfo,  cases, population, updated, todayCases, todayDeaths, recovered, active} = countries;
+                    const {country, countryInfo,  cases, population, updated, todayCases, todayDeaths, todayRecovered, active} = countries;
                     return <CountryNav style={styles.list} key={i} cases={cases} country={country.toUpperCase()} countryInfo={countryInfo}
-                      population={population} updated={updated} todayCases={todayCases}  todayDeaths={todayDeaths} recovered={recovered}
-                      active={active} />
+                    population={population} updated={updated} todayCases={todayCases}  todayDeaths={todayDeaths} todayRecovered={todayRecovered}
+                    active={active} />  
                     }) : null
                 } 
                 </div>
             </section>
-            {/* You should change this to a section tag */}
-           <section className='chartSection' style={styles.chartSection} >
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
-          
-              <section style={styles.infoSection}>
-                {/* You will create a loop to loop through the info. Just like the barchart. */}
-                {/* {
-                    !isLoaded && cardTitle.length > 0 ? cardTitle.map((cardTitle, i) => {
-                    const { todayCases} = cardTitle;
-                    return <InfoCard key={i} cardTitle={todayCases} cardInfo='Todays Cases' /> 
-                      
-                    }) : null
-                }  */}
+            <section className='chartSection' style={styles.chartSection} >
+
+            
+              {/* NEED TO WORK ON THIS PART */}
+              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  />
               
-                
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Cases' /> 
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Deaths' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Todays Recovered' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Tests' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Active' />
-                <InfoCard cardTitle={this.state.cardTitle} cardInfo='Critical' />
+              <section className='infoSection' style={styles.infoSection}> 
+
+                <InfoCard world={this.state.covid_world} />
+
               </section>
-          </section>
-        </section>
+            </section>
+        </div>
+        
+        
         
                 
-        <Footer />
+        <Footer world={this.state.covid_world} />
       </div>
 
         
@@ -160,7 +174,6 @@ const styles ={
   mainSection: {
     position: 'relative',
     display: 'flex',
-    
   },
   
   list: {
@@ -195,13 +208,15 @@ const styles ={
     display: 'flex',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
-    maxWidth: '75rem'
+    maxWidth: '75rem',
+    
   },
   infoSection: {
     position: 'relative',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
+    
    
   }
   
