@@ -53,7 +53,8 @@ const styles ={
         borderRadius: '10px',
         backgroundColor: '#212121', 
         color: '#fff',
-        fontFamily: 'Open Sans, san-serif'
+        fontFamily: 'Open Sans, san-serif',
+        margin: '1rem'
     },
     cardTitle:{
         color: '#FEA82F',

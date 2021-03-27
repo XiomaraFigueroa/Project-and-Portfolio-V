@@ -47,8 +47,8 @@ class BarChart extends Component {
           
     render(){
       return (
-      <div style={styles.div} key={this.props.id} > 
-         Only the bar chart should go here
+      <div key={this.props.id} > 
+         
       </div>
       
       )
@@ -57,8 +57,4 @@ class BarChart extends Component {
       
   export default BarChart;
 
- const styles ={
-   div: {
-     color: 'fff'
-   }
- }
+ 

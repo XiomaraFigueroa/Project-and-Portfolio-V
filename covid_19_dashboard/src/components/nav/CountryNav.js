@@ -1,5 +1,5 @@
 import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
+
 
 
 
@@ -21,10 +21,10 @@ const CountryNav = props => {
     return(
 
         
-        <ListGroup.Item action onClick={alertClicked} key={props.id} style={styles.list}>
+        <button onClick={alertClicked} key={props.id} style={styles.list}>
             <div><strong style={styles.strongText}>{props.cases}</strong> {props.country}</div> 
             <img src={props.countryInfo} alt={'Country Flag'} style={styles.img} />
-        </ListGroup.Item>
+        </button>
        
      
         
@@ -45,8 +45,7 @@ const styles = {
         alignItems: 'center',
         border: '1px solid #000',
         width: '100%',
-        fontFamily: 'Roboto, san-serif'
-        // need to figure out how to add the hover effect 
+        fontFamily: 'Roboto, san-serif',
         
     },
     img: {

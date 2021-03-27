@@ -130,60 +130,66 @@ class USMap extends Component{
 
 }
 export default USMap;
+
 const styles ={
-    container: {
-      
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: '#000'
+  },
+  mainSection: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-evenly'
+  },
+
+  
+  
+  list: {
+    width: '100%',
+    overflow: 'scroll',
+    height: '100%'
+  },
+  h1: {
+    textAlign: 'center',
+    color: '#fff',
+    marginTop: '2rem',
+    fontSize: '2rem',
+    fontFamily: 'Roboto, san-serif'
+  },
+  h2:{
+    color: '#fff',
+    fontFamily: 'Roboto, san-serif'
+  },
+  listSection: {
+     position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      width: '100%',
-      backgroundColor: '#000'
-    },
-    mainSection: {
-      position: 'relative',
-      display: 'flex',
-      
-    },
+      alignItems: 'center',
+      border: '2px solid #212121',
+      maxHeight: '45rem',
+      padding: '2rem',
+      width: '25%'
+  },
+  chartSection: {
+    position: 'relative',
+    display: 'flex',
+    flexWrap: 'wrap-reverse',
+    justifyContent: 'center',
+    width: '75%',
     
-    list: {
-      marginLeft: '2rem',
-      marginRight: '2rem',
-      width: '28rem',
-      height:'45rem',
-      overflow: 'scroll',
-    
-    },
-    h1: {
-      textAlign: 'center',
-      color: '#fff',
-      marginTop: '2rem',
-      fontSize: '2rem',
-      fontFamily: 'Roboto, san-serif'
-    },
-    h2:{
-      color: '#fff', 
-      fontFamily: 'Roboto, san-serif'
-    },
-    listSection: {
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        border: '2px solid #212121'
-    },
-    chartSection: {
-      display: 'flex',
-      flexWrap: 'wrap-reverse',
-      justifyContent: 'center',
-      maxWidth: '75rem'
-    },
-    infoSection: {
-      position: 'relative',
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-evenly'
-    }
-    
+  },
+  infoSection: {
+    position: 'relative',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     
   }
+  
+  
+  
+}

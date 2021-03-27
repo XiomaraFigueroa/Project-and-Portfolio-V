@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import BarChart from '../components/barChart/BarChart';
 import Header from '../components/header/Header';
-import CountryNav from '../components/nav/CountryNav'
+import CountryNav from '../components/nav/CountryNav';
 import Footer from '../components/footer/Footer';
-import InfoCard from '../components/card/InfoCard'
+import InfoCard from '../components/card/InfoCard';
 
 class GlobalMap extends Component{
   state = {
@@ -40,15 +40,16 @@ class GlobalMap extends Component{
      // Fetch 7 day history for all countries
     fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
     .then(response => response.json())
-    .then(data => console.log(data.cases)) // this works just have to figure how to output it.
+    .then(data => (
+    //.then(data => console.log(data.cases)) // this works just have to figure how to output it.
     // ( 
-    //   this.setState(
-    //       {
-    //           data : data
-    //       }
-    //   )
-    // ))
-    //.catch(error => console.log('parsing failed', error))
+      this.setState(
+          {
+              data : data
+          }
+      )
+    ))
+    .catch(error => console.log('parsing failed', error))
   }
 
   // Api for Cards
@@ -169,21 +170,21 @@ const styles ={
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '100%',
+    maxWidth: '100%',
     backgroundColor: '#000'
   },
   mainSection: {
     position: 'relative',
     display: 'flex',
+    justifyContent: 'space-evenly'
   },
+
+  
   
   list: {
-    marginLeft: '2rem',
-    marginRight: '2rem',
-    width: '28rem',
-    height:'45rem',
+    width: '100%',
     overflow: 'scroll',
-  
+    height: '100%'
   },
   h1: {
     textAlign: 'center',
@@ -197,28 +198,30 @@ const styles ={
     fontFamily: 'Roboto, san-serif'
   },
   listSection: {
-      position: 'relative',
+     position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      border: '2px solid #212121'
+      border: '2px solid #212121',
+      maxHeight: '45rem',
+      padding: '2rem',
+      width: '25%'
   },
   chartSection: {
     position: 'relative',
     display: 'flex',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
-    maxWidth: '75rem',
+    width: '75%',
     
   },
   infoSection: {
     position: 'relative',
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     
-   
   }
   
   
