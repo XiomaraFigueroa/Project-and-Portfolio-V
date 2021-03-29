@@ -4,13 +4,17 @@ import Header from '../components/header/Header';
 import StateNav from '../components/nav/StateNav'
 import Footer from '../components/footer/Footer'
 import InfoCard from '../components/card/InfoCard';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 class USMap extends Component{
   state = {
-    data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    data:[],
     width: 1050,
-    height: 350,
+    height: 450,
     states: [],
     isLoaded: true,
     title: 'US Map',
@@ -88,16 +92,17 @@ class USMap extends Component{
     const {states, isLoaded} = this.state;
 
     return(
-      <div className='main' style={styles.container} >
-        <Header title={this.state.title} option={this.state.option} to={this.state.to} />
-        
+      <Container fluid className='main' style={styles.container} >
+        <Header title={this.state.title} option={this.state.option} to={this.state.to}  />
+
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
+
         
-        <section className='mainSection' style={styles.mainSection} >
-            <section style={styles.listSection} className='listSection' >
+        <Row className='mainSection' style={styles.mainSection} >
+            <Col xs={{order: 'last'}} md={{order: 'last'}} lg={{order: 'last'}} xl={{order: 'first'}} style={styles.list}  >
                 <h2 style={styles.h2} >Top 50 Confirmed Cases by County</h2>
             
-                <div style={styles.list} className='list' >
+               
                 
                   {
                       !isLoaded && states.length > 0 ? states.map((states, i) => {
@@ -107,23 +112,22 @@ class USMap extends Component{
                       active={active} />
                       }) : null
                   } 
-                </div>
-          </section>
-           
-           <section className='chartSection' style={styles.chartSection} >
-              <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
-          
-              <section className='infoSection' style={styles.infoSection}>
- 
-                <InfoCard world={this.state.covid_world} />
-
+           </Col>
+            <Col xs={12}  md={12} xl={8}>
+              <section className='chartSection' style={styles.chartSection} >
+                <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
+                <section className='infoSection' style={styles.infoSection}> 
+                  <InfoCard world={this.state.covid_world} />
+                </section>
+              
               </section>
-          </section>
-        </section>
+            </Col>
+        </Row>
+        
 
         <Footer />
        
-      </div>
+      </Container>
          
     );
   }
@@ -132,25 +136,18 @@ class USMap extends Component{
 export default USMap;
 
 const styles ={
+  
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: '100%',
     backgroundColor: '#000'
   },
-  mainSection: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'space-evenly'
-  },
-
-  
-  
+ 
   list: {
-    width: '100%',
+    height: '53rem',
     overflow: 'scroll',
-    height: '100%'
+    alignContent: 'center',
+    border: '2px solid #212121',
+    
+
   },
   h1: {
     textAlign: 'center',
@@ -161,27 +158,20 @@ const styles ={
   },
   h2:{
     color: '#fff',
-    fontFamily: 'Roboto, san-serif'
+    marginTop: '2rem',
+    fontFamily: 'Roboto, san-serif',
+    textAlign: 'center'
   },
-  listSection: {
-     position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      border: '2px solid #212121',
-      maxHeight: '45rem',
-      padding: '2rem',
-      width: '25%'
-  },
+  
   chartSection: {
     position: 'relative',
     display: 'flex',
     flexWrap: 'wrap-reverse',
     justifyContent: 'center',
-    width: '75%',
-    
+    width: '100%',
+    marginTop: '1rem'
   },
+  
   infoSection: {
     position: 'relative',
     display: 'flex',
@@ -190,6 +180,6 @@ const styles ={
     
   }
   
-  
+ 
   
 }

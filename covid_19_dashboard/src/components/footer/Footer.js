@@ -5,7 +5,7 @@ const Footer = props =>{
 
     <footer style={styles.footer} key={props.id}>
         <div style={styles.div} >
-            <p>Design and Developed by Xiomara Figueroa</p>
+            <p>Designed and Developed by Xiomara Figueroa</p>
         </div>
         
     </footer>
@@ -22,6 +22,7 @@ const styles ={
         display: 'flex',
         justifyContent: 'flex-end',
         color: '#fff',
-        fontFamily: 'Open Sans, san-serif'
+        fontFamily: 'Open Sans, san-serif',
+        
     }
 }

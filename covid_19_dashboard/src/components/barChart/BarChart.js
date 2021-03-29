@@ -26,9 +26,9 @@ class BarChart extends Component {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", (d, i) => i * 150)
+        .attr("x", (d, i) => i * 158)
         .attr("y", (d, i) => this.props.height - 10 * d)
-        .attr("width", 95)
+        .attr("width", '10%')
         .attr("height", (d, i) => d * 10)
         .attr("fill", "#1A936F");
 
@@ -37,7 +37,7 @@ class BarChart extends Component {
       .enter()
       .append("text")
       .text((d) => d)
-      .attr("x", (d, i) => i * 150)
+      .attr("x", (d, i) => i * 158)
       .attr("y", (d, i) => this.props.height - (10 * d) - 3)
       .attr("fill", "#fff");
 

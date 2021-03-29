@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ListGroup from 'react-bootstrap/ListGroup'
 
 
 
@@ -21,10 +21,10 @@ const CountryNav = props => {
     return(
 
         
-        <button onClick={alertClicked} key={props.id} style={styles.list}>
+        <ListGroup.Item action onClick={alertClicked} key={props.id} style={styles.list}>
             <div><strong style={styles.strongText}>{props.cases}</strong> {props.country}</div> 
             <img src={props.countryInfo} alt={'Country Flag'} style={styles.img} />
-        </button>
+        </ListGroup.Item>
        
      
         
@@ -44,9 +44,7 @@ const styles = {
         color: '#fff',
         alignItems: 'center',
         border: '1px solid #000',
-        width: '100%',
         fontFamily: 'Roboto, san-serif',
-        
     },
     img: {
         width: '4rem',

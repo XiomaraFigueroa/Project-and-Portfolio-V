@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ListGroup from 'react-bootstrap/ListGroup'
 
 const StateNav = props => {
 
@@ -17,9 +17,9 @@ const StateNav = props => {
 
     return(
 
-        <button onClick={alertClicked} key={props.id} style={styles.list}>
+        <ListGroup.Item action onClick={alertClicked} key={props.id} style={styles.list}>
             <div><strong style={styles.strongText}>{props.cases}</strong> {props.state}</div> 
-        </button>
+        </ListGroup.Item>
        
      
         
@@ -40,14 +40,7 @@ const styles = {
         color: '#fff',
         alignItems: 'center',
         border: '1px solid #000',
-        width: '100%',
-        fontFamily: 'Roboto, san-serif'
-        
-    },
-    img: {
-        width: '4rem',
-        height: '2rem',
-        marginRight: '1rem'
+        fontFamily: 'Roboto, san-serif',
     },
     strongText: {
         color: 'red',
