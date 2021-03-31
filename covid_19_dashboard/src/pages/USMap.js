@@ -103,7 +103,7 @@ class USMap extends Component{
                 <h2 style={styles.h2} >Top 50 Confirmed Cases by County</h2>
             
                
-                
+                <section style={styles.listSection}>
                   {
                       !isLoaded && states.length > 0 ? states.map((states, i) => {
                       const {state,  cases, population, updated, todayCases, todayDeaths,recovered, active } = states;
@@ -112,6 +112,7 @@ class USMap extends Component{
                       active={active} />
                       }) : null
                   } 
+                </section>
            </Col>
             <Col xs={12}  md={12} xl={8}>
               <section className='chartSection' style={styles.chartSection} >
@@ -142,12 +143,12 @@ const styles ={
   },
  
   list: {
-    height: '53rem',
-    overflow: 'scroll',
-    alignContent: 'center',
     border: '2px solid #212121',
-    
-
+  },
+  listSection: {
+    overflow: 'scroll',
+    height: '48rem',
+    alignContent: 'center',
   },
   h1: {
     textAlign: 'center',

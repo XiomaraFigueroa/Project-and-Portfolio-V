@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 class GlobalMap extends Component{
   state = {
-    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
-    data: [],
+    chart_data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    //chart_data: [],
     width: 1050,
     height: 450,
     countries: [],
@@ -34,27 +34,26 @@ class GlobalMap extends Component{
         console.log(`Error.Try again.`)
     }      
   }
-  // Fetches the data.
-  fetchDataForBar(){ //============ NEED TO WORK ON THIS PART ===========//
-    this.setState({
-      data:{},
-      
-    })
-     // Fetch 7 day history for all countries
-    fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
-    .then(response => response.json())
-    .then(data => console.log(data.cases)) // this works just have to figure how to output it.
-    // .then(data => (
-    // // ( 
-    //   this.setState(
-    //       {
-    //           data : data.cases
-    //       }
-    //   )
-    // ))
-    .catch(error => console.log('parsing failed', error))
+ // Fetches the data.
+ fetchDataForBar(){ //============ NEED TO WORK ON THIS PART ===========//
+  
+  this.setState({
+    chart_data:[],
     
-  }
+  })
+   // Fetch 7 day history for all countries
+  fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
+  .then(response => response.json())
+  // .then(data => {
+  //   this.setState(
+  //       {
+  //          chart_data: data.cases
+  //       }
+  //   )
+  // })
+  .catch(error => console.log('parsing failed', error))
+  
+}
 
   // Api for Cards
   fetchAll(){
@@ -65,13 +64,13 @@ class GlobalMap extends Component{
      // Fetch world
      fetch('https://disease.sh/v3/covid-19/all')
      .then(response => response.json())
-     .then(data => (
+     .then(data => {
          this.setState(
              {
                  covid_world : data
              }
          )
-     ))
+    })
     .catch(error => console.log('parsing failed', error))
 
     
@@ -129,7 +128,7 @@ class GlobalMap extends Component{
 
                 <h2 style={styles.h2} >Cases by Country</h2>
             
-                
+                <section style={styles.listSection}>
                 
                   {
                     !isLoaded && countries.length > 0 ? countries.map((countries, i) => {
@@ -139,6 +138,8 @@ class GlobalMap extends Component{
                     active={active} />  
                     }) : null
                   } 
+
+                </section>
                
             </Col>
             <Col xs={12}  md={12} xl={8} >
@@ -146,7 +147,7 @@ class GlobalMap extends Component{
             
             
               {/* NEED TO WORK ON THIS PART */}
-              <BarChart data={this.state.data}  width={this.state.width} height={this.state.height}  />
+              <BarChart data={this.state.chart_data}  width={this.state.width} height={this.state.height}  />
 
               <section className='infoSection' style={styles.infoSection}> 
                 <InfoCard world={this.state.covid_world} />
@@ -178,12 +179,12 @@ const styles ={
   },
  
   list: {
-    height: '53rem',
-    overflow: 'scroll',
-    alignContent: 'center',
     border: '2px solid #212121',
-    
-
+  },
+  listSection: {
+    overflow: 'scroll',
+    height: '48rem',
+    alignContent: 'center',
   },
   h1: {
     textAlign: 'center',
@@ -202,7 +203,7 @@ const styles ={
   chartSection: {
     position: 'relative',
     display: 'flex',
-    flexWrap: 'wrap-reverse',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     width: '100%',
     marginTop: '1rem'
