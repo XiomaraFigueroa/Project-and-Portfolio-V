@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 class GlobalMap extends Component{
   state = {
-    chart_data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
-    //chart_data: [],
+    //chart_data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
+    chart_data: [],
     width: 1050,
     height: 450,
     countries: [],
@@ -44,13 +44,13 @@ class GlobalMap extends Component{
    // Fetch 7 day history for all countries
   fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
   .then(response => response.json())
-  // .then(data => {
-  //   this.setState(
-  //       {
-  //          chart_data: data.cases
-  //       }
-  //   )
-  // })
+  .then(data => {
+    this.setState(
+        {
+           chart_data: data.cases
+        }
+    )
+  })
   .catch(error => console.log('parsing failed', error))
   
 }

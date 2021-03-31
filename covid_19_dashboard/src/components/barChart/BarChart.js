@@ -5,7 +5,11 @@ import Chart from 'chart.js';
 
 class BarChart extends Component {
 
-  
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.data !== this.props.data) {
+  //     this.drawChart2();
+  //   }
+  // }
   
     componentDidMount() {
       this.drawChart2();
@@ -13,14 +17,15 @@ class BarChart extends Component {
     }
      drawChart2(){
       const ctx = document.getElementById("myChart");
+     
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: [1, 2, 3, 4, 5, 6, 7], // I need to figure out how to pass the date
+        labels: [" ", " ", " ", " ", " ", " ", " "], // I need to figure out how to pass the date
         datasets: [
           {
             label: "Cases From The Last 7 Days ",
-            data: [12, 19, 3, 5, 2, 3, 7], // I need to figure out how to pass the cases
+            data: this.props.data, // I need to figure out how to pass the cases
             backgroundColor: [
               "#1A936F",
               "#1A936F",
@@ -75,7 +80,7 @@ class BarChart extends Component {
     render(){
       return (
       <div className="chart" style={styles.test}> 
-        <canvas id="myChart" width={this.props.width} height={this.props.height} />
+        <canvas id="myChart" width={this.props.width} height={this.props.height}  />
       </div>
       
       )
