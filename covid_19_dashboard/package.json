@@ -2,6 +2,7 @@
   "name": "covid_19_dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -22,6 +23,8 @@
     "yarn": "^1.22.10"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
