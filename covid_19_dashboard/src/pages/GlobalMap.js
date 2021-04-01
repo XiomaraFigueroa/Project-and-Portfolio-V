@@ -10,8 +10,10 @@ import Col from 'react-bootstrap/Col';
 
 class GlobalMap extends Component{
   state = {
-    //chart_data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
     chart_data: [],
+    labels: [],
+    data: [],
+    id: [],
     width: 1050,
     height: 450,
     countries: [],
@@ -20,7 +22,6 @@ class GlobalMap extends Component{
     to: '/USMap',
     option: 'US Map',
     covid_world:[],
-    color: '#fea82f'
   }
   // Loads the page.
   componentDidMount(){
@@ -34,9 +35,10 @@ class GlobalMap extends Component{
         console.log(`Error.Try again.`)
     }      
   }
+
  // Fetches the data.
- fetchDataForBar(){ //============ NEED TO WORK ON THIS PART ===========//
-  
+ fetchDataForBar(){ 
+
   this.setState({
     chart_data:[],
     
@@ -45,6 +47,7 @@ class GlobalMap extends Component{
   fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=7')
   .then(response => response.json())
   .then(data => {
+
     this.setState(
         {
            chart_data: data.cases
@@ -114,8 +117,7 @@ class GlobalMap extends Component{
   
  
   render(){
-    const {countries, isLoaded} = this.state;
-
+    const {countries, chart_data, labels, data, id, isLoaded} = this.state;
     
     return(
       <Container fluid className='main' style={styles.container} >
@@ -124,7 +126,7 @@ class GlobalMap extends Component{
         <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
 
         <Row className='mainSection' style={styles.mainSection} >
-            <Col xs={{order: 'last'}} md={{order: 'last'}} lg={{order: 'last'}} xl={{order: 'first'}} className='listSection' style={styles.list} >
+            <Col xs={{order: 'last'}}  md={{order: 'last'}} lg={{order: 'last'}} xl={{order: 'first'}} className='listSection' style={styles.list} >
 
                 <h2 style={styles.h2} >Cases by Country</h2>
             
@@ -144,10 +146,25 @@ class GlobalMap extends Component{
             </Col>
             <Col xs={12}  md={12} xl={8} >
             <section className='chartSection' style={styles.chartSection} >
+
+                  {
+                    Object.keys(chart_data).forEach((key, i) =>{
+
+                      labels.push(key)
+                      if (labels.length > 7)
+                       labels.shift();
+                      data.push(chart_data[key])
+
+                      id.push(i)
+                      
+                    
+                    })
+                    
+                  }
+
+                <BarChart key={id} labels={labels} data={data} width={this.state.width} height={this.state.height} />
             
-            
-              {/* NEED TO WORK ON THIS PART */}
-              <BarChart data={this.state.chart_data}  width={this.state.width} height={this.state.height}  />
+           
 
               <section className='infoSection' style={styles.infoSection}> 
                 <InfoCard world={this.state.covid_world} />
@@ -214,7 +231,7 @@ const styles ={
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    
+    width: '100%'
   }
   
  

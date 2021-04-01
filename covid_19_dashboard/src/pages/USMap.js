@@ -11,8 +11,10 @@ import Col from 'react-bootstrap/Col';
 
 class USMap extends Component{
   state = {
-    //data: [12, 5, 6, 6, 9, 10, 15], // Need to add the Api data.
-    data:[],
+    chart_data: [],
+    labels: [],
+    data: [],
+    id: [],
     width: 1050,
     height: 450,
     states: [],
@@ -28,10 +30,34 @@ class USMap extends Component{
     if(isLoaded){
         this.fetchData();
         this.fetchAll();
+        this.fetchDataForBar();
     } else {
         console.log(`Error.Try again.`)
     }      
   }
+
+  // Fetches the data.
+ fetchDataForBar(){ 
+
+  this.setState({
+    chart_data:[],
+    
+  })
+   // Fetch 7 day history for all states
+  fetch('https://disease.sh/v3/covid-19/historical/usa?lastdays=7')
+  .then(response => response.json())
+  .then(data => {
+
+    this.setState(
+        {
+           chart_data: data.timeline.cases
+        }
+    )
+  })
+  .catch(error => console.log('parsing failed', error))
+  
+}
+
   
   fetchAll(){
     this.setState({
@@ -89,7 +115,7 @@ class USMap extends Component{
   }
     
   render(){
-    const {states, isLoaded} = this.state;
+    const {states, chart_data, labels, data, id, isLoaded} = this.state;
 
     return(
       <Container fluid className='main' style={styles.container} >
@@ -116,7 +142,24 @@ class USMap extends Component{
            </Col>
             <Col xs={12}  md={12} xl={8}>
               <section className='chartSection' style={styles.chartSection} >
-                <BarChart  data={this.state.data} width={this.state.width} height={this.state.height}  /> 
+
+                {
+                  Object.keys(chart_data).forEach((key, i) =>{
+
+                    labels.push(key)
+                    if (labels.length > 7)
+                      labels.shift();
+                    data.push(chart_data[key])
+
+                    id.push(i)
+
+                  })
+                    
+                }
+
+                <BarChart key={id} labels={labels} data={data} width={this.state.width} height={this.state.height} />
+                
+
                 <section className='infoSection' style={styles.infoSection}> 
                   <InfoCard world={this.state.covid_world} />
                 </section>
@@ -137,9 +180,9 @@ class USMap extends Component{
 export default USMap;
 
 const styles ={
-  
   container: {
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+
   },
  
   list: {
@@ -167,7 +210,7 @@ const styles ={
   chartSection: {
     position: 'relative',
     display: 'flex',
-    flexWrap: 'wrap-reverse',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     width: '100%',
     marginTop: '1rem'
@@ -178,7 +221,7 @@ const styles ={
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    
+    width: '100%'
   }
   
  
