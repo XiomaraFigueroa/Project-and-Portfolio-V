@@ -36,7 +36,7 @@ class USMap extends Component{
     }      
   }
 
-  // Fetches the data.
+  // Fetches the data for the barchart.
  fetchDataForBar(){ 
 
   this.setState({
@@ -58,13 +58,13 @@ class USMap extends Component{
   
 }
 
-  
+  // Fetches the data for all the US
   fetchAll(){
     this.setState({
       covid_world:[],
       
     })
-     // Put the new fetch info here.
+     
      fetch('https://disease.sh/v3/covid-19/countries/United%20States?strict=true')
      .then(response => response.json())
      .then(data => (
@@ -79,7 +79,7 @@ class USMap extends Component{
     
   }
 
-  // Fetches the data.
+  // Fetches the data for the infor card and alert.
   fetchData(){
 
     this.setState({
@@ -108,9 +108,6 @@ class USMap extends Component{
       isLoaded:false
     }))
     .catch(error => console.log('parsing failed', error))
-    // Put the new fetch info here.
-   
-
  
   }
     
@@ -125,6 +122,7 @@ class USMap extends Component{
 
         
         <Row className='mainSection' style={styles.mainSection} >
+
             <Col xs={{order: 'last'}} md={{order: 'last'}} lg={{order: 'last'}} xl={{order: 'first'}} style={styles.list}  >
                 <h2 style={styles.h2} >Top 50 Confirmed Cases by County</h2>
             
@@ -141,6 +139,7 @@ class USMap extends Component{
                 </section>
            </Col>
             <Col xs={12}  md={12} xl={8}>
+
               <section className='chartSection' style={styles.chartSection} >
 
                 {
@@ -159,7 +158,6 @@ class USMap extends Component{
 
                 <BarChart key={id} labels={labels} data={data} width={this.state.width} height={this.state.height} />
                 
-
                 <section className='infoSection' style={styles.infoSection}> 
                   <InfoCard world={this.state.covid_world} />
                 </section>

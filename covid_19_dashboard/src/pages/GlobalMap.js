@@ -36,7 +36,7 @@ class GlobalMap extends Component{
     }      
   }
 
- // Fetches the data.
+ // Fetches the data for the barchart.
  fetchDataForBar(){ 
 
   this.setState({
