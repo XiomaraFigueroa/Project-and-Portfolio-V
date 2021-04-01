@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/css/main.806a83df.chunk.css",
+    "main.js": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/main.23d0fc31.chunk.js",
+    "main.js.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/main.23d0fc31.chunk.js.map",
+    "runtime-main.js": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/runtime-main.d3f0c7bc.js",
+    "runtime-main.js.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/runtime-main.d3f0c7bc.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.15c1c1c0.chunk.js": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/2.15c1c1c0.chunk.js",
+    "static/js/2.15c1c1c0.chunk.js.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/2.15c1c1c0.chunk.js.map",
+    "static/js/3.49a2f4f4.chunk.js": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/3.49a2f4f4.chunk.js",
+    "static/js/3.49a2f4f4.chunk.js.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/3.49a2f4f4.chunk.js.map",
+    "index.html": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.806a83df.chunk.css.map": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/css/main.806a83df.chunk.css.map",
+    "static/js/2.15c1c1c0.chunk.js.LICENSE.txt": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/js/2.15c1c1c0.chunk.js.LICENSE.txt",
+    "static/media/covid19_Logo.17020e45.png": "/XiomaraFigueroa/Project-and-Portfolio-V/tree/main/covid_19_dashboard/static/media/covid19_Logo.17020e45.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d3f0c7bc.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.15c1c1c0.chunk.js",
+    "static/css/main.806a83df.chunk.css",
+    "static/js/main.23d0fc31.chunk.js"
+  ]
+}
