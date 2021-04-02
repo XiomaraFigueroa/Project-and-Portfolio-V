@@ -2,7 +2,7 @@
   "name": "covid_19_dashboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://xiomarafigueroa.github.io/Project-and-Portfolio-V/covid_19_dashboard/",
+  "homepage": "https://xiomarafigueroa.github.io/Project-and-Portfolio-V/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
