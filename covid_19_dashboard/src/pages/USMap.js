@@ -118,7 +118,7 @@ class USMap extends Component{
       <Container fluid className='main' style={styles.container} >
         <Header title={this.state.title} option={this.state.option} to={this.state.to}  />
 
-        <h1 style={styles.h1} >Cases from the Last 7 Days</h1>
+        <h1 style={styles.h1} >Cases From The Last 7 Days</h1>
 
         
         <Row className='mainSection' style={styles.mainSection} >
